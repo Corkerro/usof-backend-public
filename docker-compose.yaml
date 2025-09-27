@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+    db:
+        image: mysql:8.0
+        container_name: blog_mysql
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+            - '${MYSQL_PORT:-3306}:3306'
+        volumes:
+            # bind mount локальной папки db_data на папку MySQL внутри контейнера
+            - ./db_data:/var/lib/mysql
+            - ./db/init:/docker-entrypoint-initdb.d
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            interval: 5s
+            timeout: 3s
+            retries: 20
