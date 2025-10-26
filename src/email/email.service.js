@@ -5,7 +5,7 @@ import { EmailVerificationRepository } from "./email-verification.repository.js"
 import { UserDeletionRepository } from "../user/user-deletion.repository.js";
 import { UserRecoveryRepository } from "../user/user-recovery.repository.js";
 
-const DEFAULT_LOGO_URL = "https://raw.githubusercontent.com/Corkerro/usof-frontend/refs/heads/main/public/logo.svg?token=GHSAT0AAAAAADN4DYK5TDWAPO3P2ZPIYDMA2H4XAEQ";
+const DEFAULT_LOGO_URL = "https://corkerro.github.io/usof-frontend-public/public/logo.svg";
 
 export class EmailService {
   static transporter = nodemailer.createTransport({
